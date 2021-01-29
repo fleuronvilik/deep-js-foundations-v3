@@ -9,7 +9,7 @@ function printRecords(recordIds) {
 		)
 	});
 
-	records = records.sort(function (a, b) {
+	records = records.sort(function TODO1(a, b) {
 		if (a.name < b.name) return -1
 		if (a.name > b.name) return 1
 		return 0
@@ -25,7 +25,13 @@ function printRecords(recordIds) {
 }
 
 function paidStudentsToEnroll() {
-	// TODO
+	var newEnrollment = studentRecords.filter(function TODO2(record) {
+		return hasPaid(record) && isNotEnrolled(record.id);
+	}).map(function getId(record) {
+		return record.id;
+	});
+
+	return [...currentEnrollment, ...newEnrollment];
 }
 
 function remindUnpaid(recordIds) {
@@ -50,10 +56,10 @@ var studentRecords = [
 ];
 
 printRecords(currentEnrollment);
-/* console.log("----");
+console.log("----");
 currentEnrollment = paidStudentsToEnroll();
 printRecords(currentEnrollment);
-console.log("----");
+/* console.log("----");
 remindUnpaid(currentEnrollment); */
 
 /*
@@ -73,3 +79,9 @@ remindUnpaid(currentEnrollment); */
 	Bob (664): Not Paid
 	Henry (105): Not Paid
 */
+function hasPaid(record) {
+	return record.paid;
+}
+function isNotEnrolled(id) {
+	return !currentEnrollment.includes(id)
+}
